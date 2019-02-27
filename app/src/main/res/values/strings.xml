@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Guess The Number</string>
+    <string name="start_game">Start game</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="version">DNAS Software \u00AE version</string>
+    <string name="game_by_babarusi_cristian">A game for KIDS by Băbăruși Cristian</string>
+    <string name="demo_version_x_x_xx">demo version x.x.xx</string>
+    <string name="game_mode_selection">Game Mode Selection</string>
+    <string name="none">None</string>
+    <string name="easy">Easy</string>
+    <string name="hard">Hard</string>
+    <string name="please_select_game_mode">Please select a game mode</string>
+    <string name="demo_dialog_text_text_text">Demo dialog text text text</string>
+    <string name="robot_say_hi_there_easy">Hi there.
+        \nDo you know what number I have now in my robotic mind?
+        \nCan you guess it?
+        \nIs a number from 1 to 200.</string>
+    <string name="robot_say_hi_there_hard">Hi there.
+        \nDo you know what number I have now in my robotic mind?
+        \nCan you guess it?
+        \nIs a number from 1 to 1000.</string>
+    <string name="yes_i_can">Yeah, I will guess it</string>
+    <string name="no_i_cant">Neh, I\'m not a magician</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_0">0</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_8">8</string>
+    <string name="_7">7</string>
+    <string name="_9">9</string>
+    <string name="your_number_here">Your number here</string>
+    <string name="ok">OK</string>
+    <string name="abandon">Abandon</string>
+    <string name="backspace_unicode">\u232B Del</string>
+    <string name="demo_attempts_0">Demo Attempts: 0</string>
+
+    <string name="attempts">Attempts:</string>
+    <string name="ohh_start_with_zero">Ohh, your number start with zero.</string>
+    <string name="is_not_valid"> is not valid, please correct it.</string>
+    <string name="zero_no_easy">Zero? No, my number is from 1 to 200.</string>
+    <string name="zero_no_hard">Zero? No, my number is from 1 to 1000.</string>
+    <string name="you_did_not_enter_number">Hey, what is this? You did not enter any number.</string>
+    <string name="no_is_not">No, is not</string>
+    <string name="my_num_is_bigger">. My number is bigger then this.</string>
+    <string name="my_num_is_smaller">. My number is smaller then this.</string>
+    <string name="yupii_yes">Yupii. Yes,</string>
+    <string name="is_my_num">is my number. Congratulations.
+    \n\nDo you want to play again?</string>
+    <string name="demo_show_gamemode">Game mode: DEMO</string>
+    <string name="show_easy_gamemode_selection">Game mode: EASY</string>
+    <string name="show_hard_gamemode_selection">Game mode: HARD</string>
+    <string name="wow_no_no_no">Woow. No, no, no …</string>
+    <string name="the">The</string>
+    <string name="is_huge_200">it\'s too big. My number is from 1 to 200.</string>
+    <string name="is_huge_1000">it\'s too big. My number is from 1 to 1000.</string>
+    <string name="demo_current_games_played_demo">Games played: DEMO</string>
+    <string name="guess">Guess</string>
+    <string name="current_games_played">Current games:</string>
+    <string name="one_more_time">Yeah, one more time</string>
+    <string name="go_back">Nope, I\'m going back</string>
+    <string name="attempts_point">attempts.</string>
+    <string name="you_ve_guessed">You\'ve guessed it</string>
+    <string name="from">from</string>
+    <string name="demo_total_games_played_xxx">Demo Total games played: xxx</string>
+    <string name="total_games_played">Total games played:</string>
+    <string name="all_right_easy">All right. I picked another number. Let\'s see if you can guess it. Remember is a number from 1 to 200.</string>
+    <string name="all_right_hard">All right. I picked another number. Let\'s see if you can guess it. Remember is a number from 1 to 1000.</string>
+</resources>
