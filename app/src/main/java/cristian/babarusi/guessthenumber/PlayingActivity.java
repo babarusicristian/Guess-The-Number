@@ -307,8 +307,8 @@ public class PlayingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    mTextViewPlayerNumber.setText("");
-                    setNumber("");
+                mTextViewPlayerNumber.setText("");
+                setNumber("");
             }
         });
 
@@ -541,6 +541,7 @@ public class PlayingActivity extends AppCompatActivity {
                                     AnimationUtils.loadAnimation(getApplicationContext(),
                                             R.anim.fade_in);
                             linearLayoutButtons.startAnimation(animationFadeIn);
+                            i[0] = -1; //buggy thing SOLVED
                             timer.cancel();
                         }
                     }
@@ -567,6 +568,7 @@ public class PlayingActivity extends AppCompatActivity {
 
                         if (i[0] == charTxt.length - 1) {
                             setOverAnimText(true);
+                            i[0] = -1; //buggy thing SOLVED
                             timer.cancel();
                         }
                     }
@@ -619,7 +621,6 @@ public class PlayingActivity extends AppCompatActivity {
 
     private void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        //folosim constanta de la globale SHARE_PREF
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putInt(TOTAL_GAMES_PLAYED, GameDatas.getTotalGamesPlayed());
