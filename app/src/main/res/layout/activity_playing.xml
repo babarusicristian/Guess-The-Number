@@ -6,7 +6,7 @@
     android:id="@+id/scrollView2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundal_application"
+    android:background="@drawable/fundal_app2"
     android:fillViewport="true">
 
     <android.support.constraint.ConstraintLayout
@@ -38,6 +38,7 @@
             android:fontFamily="casual"
             android:gravity="center"
             android:text="@string/demo_dialog_text_text_text"
+            android:textColor="@color/dark_brown"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintEnd_toStartOf="@+id/guideline_right"
@@ -267,6 +268,8 @@
             tools:visibility="visible" />
 
         <TextView
+            android:clickable="true"
+            android:focusable="true"
             android:id="@+id/textview_player_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

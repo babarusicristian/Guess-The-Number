@@ -303,6 +303,15 @@ public class PlayingActivity extends AppCompatActivity {
             }
         });
 
+        mTextViewPlayerNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    mTextViewPlayerNumber.setText("");
+                    setNumber("");
+            }
+        });
+
         mButtonGuess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -433,7 +442,7 @@ public class PlayingActivity extends AppCompatActivity {
                                         }
                                     });
                                 }
-                            }, 2666);
+                            }, 1666);
                         }
                     }
                 }
@@ -537,7 +546,7 @@ public class PlayingActivity extends AppCompatActivity {
                     }
                 });
             }
-        }, 0, 66);
+        }, 0, 40);
     }
 
     private void animateText(final String txt, final TextView tv) {
@@ -563,7 +572,7 @@ public class PlayingActivity extends AppCompatActivity {
                     }
                 });
             }
-        }, 0, 66);
+        }, 0, 40);
     }
 
     //increment attempts
