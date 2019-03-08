@@ -25,9 +25,10 @@ public class PlayingActivity extends AppCompatActivity {
     public static final String TOTAL_GAMES_PLAYED = "totalGamesPlayed";
 
     private final static int MAX_LEN_EASY = 3;
-    private final static int MAX_LEN_HARD = 4;
+    private final static int MAX_LEN_HARD = 5;
 
     private Game mGame;
+    private GameTimers mGameTimers;
     private String mNumber = "";
     private String mGameMode = "";
     private Boolean mOverAnimText = true;
@@ -55,6 +56,7 @@ public class PlayingActivity extends AppCompatActivity {
     private TextView mTextViewCurrentGamesPlayed;
     private Button mButtonOneMoreTime;
     private Button mButtonGoBack;
+    private TextView mTextViewElapsedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class PlayingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_playing);
 
         mGame = new Game();
+        mGameTimers = new GameTimers();
         initView();
 
         //Receive and set the game mode data
@@ -82,7 +85,7 @@ public class PlayingActivity extends AppCompatActivity {
                     mTextViewShowGameMode.setText(getString(R.string.show_easy_gamemode_selection));
                     mGame.randomizeEasyMode();
                     //animate first robot message
-                    mGame.setRobotMessage(getString(R.string.robot_say_hi_there_easy));
+                    mGame.setRobotMessage(getString(R.string.robot_say_hi_there_easy) + " " + Game.NUM_EASY + ".");
                     mTextViewRobotMessage.setText(mGame.getRobotMessage());
                     animateTextWithButtons(mGame.getRobotMessage(), mTextViewRobotMessage,
                             mLinearLayoutButtons);
@@ -93,7 +96,7 @@ public class PlayingActivity extends AppCompatActivity {
                     mTextViewShowGameMode.setText(getString(R.string.show_hard_gamemode_selection));
                     mGame.randomizeHardMode();
                     //animate first robot message
-                    mGame.setRobotMessage(getString(R.string.robot_say_hi_there_hard));
+                    mGame.setRobotMessage(getString(R.string.robot_say_hi_there_hard) + " " + Game.NUM_HARD + ".");
                     mTextViewRobotMessage.setText(mGame.getRobotMessage());
                     animateTextWithButtons(mGame.getRobotMessage(), mTextViewRobotMessage,
                             mLinearLayoutButtons);
@@ -110,6 +113,16 @@ public class PlayingActivity extends AppCompatActivity {
                 mButtonYesIcan.setVisibility(View.GONE);
                 mButtonNoIcant.setVisibility(View.GONE);
                 showMyGameKeyboard();
+
+                //start ElapsedTime waiting finish effect fade in
+                final Timer timerTemp = new Timer();
+                timerTemp.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        mGameTimers.startElapsedTime(mTextViewElapsedTime, PlayingActivity.this);
+                        timerTemp.cancel();
+                    }
+                }, 1666);
             }
         });
 
@@ -306,7 +319,6 @@ public class PlayingActivity extends AppCompatActivity {
         mTextViewPlayerNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 mTextViewPlayerNumber.setText("");
                 setNumber("");
             }
@@ -315,170 +327,14 @@ public class PlayingActivity extends AppCompatActivity {
         mButtonGuess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //start verifications
-                if (mTextViewPlayerNumber.getText().toString().startsWith("0")) {
-                    //if is zero
-                    if (mTextViewPlayerNumber.getText().toString().equals("0")) {
-                        if (getGameMode().equals("easy") && isOverAnimText()) {
-                            mGame.setRobotMessage(getString(R.string.zero_no_easy));
-                            animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                            attemptPlus(); //count attempt
-                        } else {
-                            if (isOverAnimText()) {
-                                mGame.setRobotMessage(getString(R.string.zero_no_hard));
-                                animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                                attemptPlus(); //count attempt
-                            }
-                        }
-                    } else {
-                        //if start only with zero
-                        if (isOverAnimText()) {
-                            mGame.setRobotMessage(getString(R.string.ohh_start_with_zero) + " "
-                                    + getNumber() + " " + getString(R.string.is_not_valid));
-                            animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                            //don't count attempt
-                        }
-                    }
-                } else {
-                    //if no number is inserted
-                    if (mTextViewPlayerNumber.getText().equals("") && isOverAnimText()) {
-                        mGame.setRobotMessage(getString(R.string.you_did_not_enter_number));
-                        animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                        //don't count attempt
-                    } else if (!mTextViewPlayerNumber.getText().equals("")) {
-                        //all verification has finished AND the number is inserted
-                        int num = Integer.valueOf(mTextViewPlayerNumber.getText().toString());
-
-                        if (getGameMode().equals("easy") && num > 200 && isOverAnimText()) {
-                            mGame.setRobotMessage(getString(R.string.wow_no_no_no) + " "
-                                    + getString(R.string.the) + " " + num + " "
-                                    + getString(R.string.is_huge_200));
-                            animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                            attemptPlus(); //count attempt
-                        } else if (getGameMode().equals("hard") && num > 1000 && isOverAnimText()) {
-                            mGame.setRobotMessage(getString(R.string.wow_no_no_no) + " "
-                                    + getString(R.string.the) + " " + num + " "
-                                    + getString(R.string.is_huge_1000));
-                            animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                            attemptPlus(); //count attempt
-                        } else if (num < mGame.getNumberToBeGuessed() && isOverAnimText()) {
-                            mGame.setRobotMessage(getString(R.string.no_is_not) + " " + num + getString(R.string.my_num_is_bigger));
-                            animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                            attemptPlus(); //count attempt
-                        } else if (num > mGame.getNumberToBeGuessed() && isOverAnimText()) {
-                            mGame.setRobotMessage(getString(R.string.no_is_not) + " " + num + getString(R.string.my_num_is_smaller));
-                            animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                            attemptPlus(); //count attempt
-                        } else if (num == mGame.getNumberToBeGuessed() && isOverAnimText()) {
-                            mGame.setRobotMessage(getString(R.string.yupii_yes) + " " + num + " " + getString(R.string.is_my_num));
-                            animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                            attemptPlus(); //count attempt
-
-                            //increment games played and display
-                            mGame.setCurrentGamesPlayed(mGame.getCurrentGamesPlayed() + 1);
-                            mTextViewCurrentGamesPlayed.setText(MessageFormat.format("{0} {1}",
-                                    getString(R.string.current_games_played),
-                                    mGame.getCurrentGamesPlayed()));
-
-                            //increment total games played
-                            GameDatas.setTotalGamesPlayed(GameDatas.getTotalGamesPlayed() + 1);
-
-                            //hide buttons
-                            mButtonNum0.setVisibility(View.INVISIBLE);
-                            mButtonNum1.setVisibility(View.INVISIBLE);
-                            mButtonNum2.setVisibility(View.INVISIBLE);
-                            mButtonNum3.setVisibility(View.INVISIBLE);
-                            mButtonNum4.setVisibility(View.INVISIBLE);
-                            mButtonNum5.setVisibility(View.INVISIBLE);
-                            mButtonNum6.setVisibility(View.INVISIBLE);
-                            mButtonNum7.setVisibility(View.INVISIBLE);
-                            mButtonNum8.setVisibility(View.INVISIBLE);
-                            mButtonNum9.setVisibility(View.INVISIBLE);
-                            mButtonBackSpace.setVisibility(View.INVISIBLE);
-                            mButtonGuess.setVisibility(View.INVISIBLE);
-
-                            //diplaying winner text
-                            mTextViewPlayerNumber.setText(getString(R.string.you_ve_guessed));
-                            mTextViewAttempts.setText(MessageFormat.format("{0} {1} {2}",
-                                    getString(R.string.from), mGame.getAttempts(),
-                                    getString(R.string.attempts_point)));
-
-                            //animate the winning text
-                            mTimerBlinking = new Timer();
-                            mTimerBlinking.schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (mTextViewPlayerNumber.getText().equals(getString(R.string.you_ve_guessed))) {
-                                                mTextViewPlayerNumber.setText("");
-                                            } else {
-                                                mTextViewPlayerNumber.setText(getString(R.string.you_ve_guessed));
-                                            }
-                                        }
-                                    });
-                                }
-                            }, 335, 888);
-
-                            //showing the next buttons with DELAY
-                            final Timer timerLate = new Timer();
-                            timerLate.schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            mButtonOneMoreTime.setVisibility(View.VISIBLE);
-                                            mButtonGoBack.setVisibility(View.VISIBLE);
-                                            //put fade in animations on buttons
-                                            Animation animationFadeIn =
-                                                    AnimationUtils.loadAnimation(getApplicationContext(),
-                                                            R.anim.fade_in);
-                                            mButtonOneMoreTime.startAnimation(animationFadeIn);
-                                            mButtonGoBack.startAnimation(animationFadeIn);
-                                            timerLate.cancel();
-                                        }
-                                    });
-                                }
-                            }, 1666);
-                        }
-                    }
-                }
+                winningMethod();
             }
         });
 
         mButtonOneMoreTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isOverAnimText()) {
-                    mTimerBlinking.cancel(); // cancel winning timer
-                    setNumber("");//reset number
-                    mTextViewPlayerNumber.setText("");
-                    mGame.setAttempts(0); //reset attempts
-                    mTextViewAttempts.setText(MessageFormat.format("{0} {1}",
-                            getString(R.string.attempts), mGame.getAttempts()));
-
-                    mButtonOneMoreTime.setVisibility(View.GONE);
-                    mButtonGoBack.setVisibility(View.GONE);
-
-                    //new randomize and new messages for robot
-                    if (getGameMode().equals("easy")) {
-                        mGame.randomizeEasyMode();
-                        Logging.show(PlayingActivity.this,
-                                "new EASY random ales: " + mGame.getNumberToBeGuessed());
-                        mGame.setRobotMessage(getString(R.string.all_right_easy));
-                        animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    } else if (getGameMode().equals("hard")) {
-                        mGame.randomizeHardMode();
-                        Logging.show(PlayingActivity.this,
-                                "new HARD random ales: " + mGame.getNumberToBeGuessed());
-                        mGame.setRobotMessage(getString(R.string.all_right_hard));
-                        animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    }
-                    showMyGameKeyboard();
-                }
+                playAgain();
             }
         });
 
@@ -516,6 +372,202 @@ public class PlayingActivity extends AppCompatActivity {
         mTextViewCurrentGamesPlayed = findViewById(R.id.textview_current_games_played);
         mButtonOneMoreTime = findViewById(R.id.button_one_more_time);
         mButtonGoBack = findViewById(R.id.button_go_back);
+        mTextViewElapsedTime = findViewById(R.id.textview_elapsed_time);
+        mTextViewElapsedTime.setText(MessageFormat.format("{0} 00:00",
+                getString(R.string.elapsed_time)));
+    }
+
+    private void winningMethod() {
+        //start verifications
+        if (mTextViewPlayerNumber.getText().toString().startsWith("0")) {
+            //if is zero
+            if (mTextViewPlayerNumber.getText().toString().equals("0")) {
+                if (getGameMode().equals("easy") && isOverAnimText()) {
+                    mGame.setRobotMessage(getString(R.string.zero_no_easy) + " " + Game.NUM_EASY + ".");
+                    animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+                    attemptPlus(); //count attempt
+                } else {
+                    if (isOverAnimText()) {
+                        mGame.setRobotMessage(getString(R.string.zero_no_hard) + " " + Game.NUM_HARD + ".");
+                        animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+                        attemptPlus(); //count attempt
+                    }
+                }
+            } else {
+                //if start only with zero
+                if (isOverAnimText()) {
+                    mGame.setRobotMessage(getString(R.string.ohh_start_with_zero) + " "
+                            + getNumber() + " " + getString(R.string.is_not_valid));
+                    animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+                    //don't count attempt
+                }
+            }
+        } else {
+            //if no number is inserted
+            if (mTextViewPlayerNumber.getText().equals("") && isOverAnimText()) {
+                mGame.setRobotMessage(getString(R.string.you_did_not_enter_number));
+                animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+                //don't count attempt
+            } else if (!mTextViewPlayerNumber.getText().equals("")) {
+                //all verification has finished AND the number is inserted
+                int num = Integer.valueOf(mTextViewPlayerNumber.getText().toString());
+
+                if (getGameMode().equals("easy") && num > Game.NUM_EASY && isOverAnimText()) {
+                    mGame.setRobotMessage(getString(R.string.wow_no_no_no) + " "
+                            + getString(R.string.the) + " " + num + " "
+                            + getString(R.string.is_huge_num_easy) + " " + Game.NUM_EASY + ".");
+                    animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+                    attemptPlus(); //count attempt
+                } else if (getGameMode().equals("hard") && num > Game.NUM_HARD && isOverAnimText()) {
+                    mGame.setRobotMessage(getString(R.string.wow_no_no_no) + " "
+                            + getString(R.string.the) + " " + num + " "
+                            + getString(R.string.is_huge_num_hard) + " " + Game.NUM_HARD + ".");
+                    animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+                    attemptPlus(); //count attempt
+                } else if (num < mGame.getNumberToBeGuessed() && isOverAnimText()) {
+                    mGame.setRobotMessage(getString(R.string.no_is_not) + " " + num + getString(R.string.my_num_is_bigger));
+                    animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+                    attemptPlus(); //count attempt
+                } else if (num > mGame.getNumberToBeGuessed() && isOverAnimText()) {
+                    mGame.setRobotMessage(getString(R.string.no_is_not) + " " + num + getString(R.string.my_num_is_smaller));
+                    animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+                    attemptPlus(); //count attempt
+                } else if (num == mGame.getNumberToBeGuessed() && isOverAnimText()) {
+                    mGame.setRobotMessage(getString(R.string.yupii_yes) + " " + num + " " + getString(R.string.is_my_num));
+                    animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+                    attemptPlus(); //count attempt
+
+                    //increment games played and display
+                    mGame.setCurrentGamesPlayed(mGame.getCurrentGamesPlayed() + 1);
+                    mTextViewCurrentGamesPlayed.setText(MessageFormat.format("{0} {1}",
+                            getString(R.string.current_games_played),
+                            mGame.getCurrentGamesPlayed()));
+
+                    //increment total games played
+                    GameDatas.setTotalGamesPlayed(GameDatas.getTotalGamesPlayed() + 1);
+
+                    //hide buttons
+                    mButtonNum0.setVisibility(View.INVISIBLE);
+                    mButtonNum1.setVisibility(View.INVISIBLE);
+                    mButtonNum2.setVisibility(View.INVISIBLE);
+                    mButtonNum3.setVisibility(View.INVISIBLE);
+                    mButtonNum4.setVisibility(View.INVISIBLE);
+                    mButtonNum5.setVisibility(View.INVISIBLE);
+                    mButtonNum6.setVisibility(View.INVISIBLE);
+                    mButtonNum7.setVisibility(View.INVISIBLE);
+                    mButtonNum8.setVisibility(View.INVISIBLE);
+                    mButtonNum9.setVisibility(View.INVISIBLE);
+                    mButtonBackSpace.setVisibility(View.INVISIBLE);
+                    mButtonGuess.setVisibility(View.INVISIBLE);
+
+                    //WINNING METHOD
+                    //diplaying winner text
+                    mTextViewPlayerNumber.setText(getString(R.string.you_ve_guessed));
+                    mTextViewAttempts.setText(MessageFormat.format("{0} {1} {2}",
+                            getString(R.string.from), mGame.getAttempts(),
+                            getString(R.string.attempts_point)));
+
+                    //animate the winning text
+                    mTimerBlinking = new Timer();
+                    mTimerBlinking.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (mTextViewPlayerNumber.getText().equals(getString(R.string.you_ve_guessed))) {
+                                        mTextViewPlayerNumber.setText("");
+                                    } else {
+                                        mTextViewPlayerNumber.setText(getString(R.string.you_ve_guessed));
+                                    }
+                                }
+                            });
+                        }
+                    }, 335, 888);
+
+                    //stop elapsedTime
+                    mGameTimers.stopElapsedTime();
+
+                    //showing the next buttons with DELAY
+                    final Timer timerLate = new Timer();
+                    timerLate.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mButtonOneMoreTime.setVisibility(View.VISIBLE);
+                                    mButtonGoBack.setVisibility(View.VISIBLE);
+                                    //put fade in animations on buttons
+                                    Animation animationFadeIn =
+                                            AnimationUtils.loadAnimation(getApplicationContext(),
+                                                    R.anim.fade_in);
+                                    mButtonOneMoreTime.startAnimation(animationFadeIn);
+                                    mButtonGoBack.startAnimation(animationFadeIn);
+                                    timerLate.cancel();
+                                }
+                            });
+                        }
+                    }, 1666);
+                }
+            }
+        }
+    }
+
+    private void playAgain() {
+
+        if (isOverAnimText()) {
+            mTimerBlinking.cancel(); // cancel winning timer
+            setNumber("");//reset number
+            mTextViewPlayerNumber.setText("");
+            mGame.setAttempts(0); //reset attempts
+            mTextViewAttempts.setText(MessageFormat.format("{0} {1}",
+                    getString(R.string.attempts), mGame.getAttempts()));
+
+            mButtonOneMoreTime.setVisibility(View.GONE);
+            mButtonGoBack.setVisibility(View.GONE);
+
+            //new randomize and new messages for robot
+            if (getGameMode().equals("easy")) {
+                mGame.randomizeEasyMode();
+                Logging.show(PlayingActivity.this,
+                        "new EASY random ales: " + mGame.getNumberToBeGuessed());
+                mGame.setRobotMessage(getString(R.string.all_right_easy) + " " + Game.NUM_EASY + ".");
+                animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+            } else if (getGameMode().equals("hard")) {
+                mGame.randomizeHardMode();
+                Logging.show(PlayingActivity.this,
+                        "new HARD random ales: " + mGame.getNumberToBeGuessed());
+                mGame.setRobotMessage(getString(R.string.all_right_hard) + " " + Game.NUM_HARD + ".");
+                animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
+            }
+
+            mTextViewElapsedTime.setText(MessageFormat.format("{0} 00:00",
+                    getString(R.string.elapsed_time)));
+            showMyGameKeyboard();
+
+            //delay on start elapsed time
+            final Timer timerTemp = new Timer();
+            timerTemp.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //reset and start the elapsed time from zero only if robot
+                            // msg is over
+                            if (isOverAnimText()) {
+                                mGameTimers.resetElapsedTime();
+                                mGameTimers.startElapsedTime(mTextViewElapsedTime,
+                                        PlayingActivity.this);
+                                timerTemp.cancel();
+                            }
+                        }
+                    });
+                }
+            }, 0, 100);
+        }
+
     }
 
     private void animateTextWithButtons(final String txt, final TextView tv,
@@ -587,6 +639,7 @@ public class PlayingActivity extends AppCompatActivity {
     private void showMyGameKeyboard() {
         mTextViewPlayerNumber.setVisibility(View.VISIBLE);
         mTextViewAttempts.setVisibility(View.VISIBLE);
+        mTextViewElapsedTime.setVisibility(View.VISIBLE);
         mButtonNum0.setVisibility(View.VISIBLE);
         mButtonNum1.setVisibility(View.VISIBLE);
         mButtonNum2.setVisibility(View.VISIBLE);
@@ -605,6 +658,7 @@ public class PlayingActivity extends AppCompatActivity {
                 AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
         mTextViewPlayerNumber.startAnimation(animationFadeIn);
         mTextViewAttempts.startAnimation(animationFadeIn);
+        mTextViewElapsedTime.startAnimation(animationFadeIn);
         mButtonNum0.startAnimation(animationFadeIn);
         mButtonNum1.startAnimation(animationFadeIn);
         mButtonNum2.startAnimation(animationFadeIn);

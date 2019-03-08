@@ -4,17 +4,20 @@ import java.util.Random;
 
 public class Game {
 
+    static final int NUM_EASY = 100;
+    static final int NUM_HARD = 10000;
+
     private int mNumberToBeGuessed;
     private int mAttempts;
     private String mRobotMessage;
     private int currentGamesPlayed;
 
     public void randomizeEasyMode() {
-        setNumberToBeGuessed(1 + new Random().nextInt(200));
+        setNumberToBeGuessed(1 + new Random().nextInt(NUM_EASY));
     }
 
     public void randomizeHardMode() {
-        setNumberToBeGuessed(1 + new Random().nextInt(1000));
+        setNumberToBeGuessed(1 + new Random().nextInt(NUM_HARD));
     }
 
     public int getNumberToBeGuessed() {
