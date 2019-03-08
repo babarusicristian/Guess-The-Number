@@ -5,6 +5,7 @@ import java.util.Random;
 public class Game {
 
     static final int NUM_EASY = 100;
+    static final int NUM_MEDIUM = 1000;
     static final int NUM_HARD = 10000;
 
     private int mNumberToBeGuessed;
@@ -14,6 +15,10 @@ public class Game {
 
     public void randomizeEasyMode() {
         setNumberToBeGuessed(1 + new Random().nextInt(NUM_EASY));
+    }
+
+    public void randomizeMediumMode() {
+        setNumberToBeGuessed(1 + new Random().nextInt(NUM_MEDIUM));
     }
 
     public void randomizeHardMode() {

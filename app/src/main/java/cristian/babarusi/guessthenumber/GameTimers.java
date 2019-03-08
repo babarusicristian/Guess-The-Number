@@ -3,7 +3,6 @@ package cristian.babarusi.guessthenumber;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-
 import java.text.MessageFormat;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,10 +15,8 @@ public class GameTimers extends AppCompatActivity {
     private Timer timerElapTime;
 
     public void startElapsedTime(final TextView textView, final Context context) {
-
         timerElapTime = new Timer();
         timerElapTime.schedule(new TimerTask() {
-
             String showMinutes = "00";
             String showSeconds = "00";
 
@@ -28,7 +25,6 @@ public class GameTimers extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
                         setSeconds(getSeconds() + 1);
 
                         if (getSeconds() == 60) {

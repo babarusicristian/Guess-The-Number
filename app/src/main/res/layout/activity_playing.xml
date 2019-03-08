@@ -31,12 +31,19 @@
             app:srcCompat="@drawable/robot_playing" />
 
         <TextView
+            android:background="@drawable/fundal_ripple_effect"
             android:id="@+id/textview_robot_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_8"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="casual"
             android:gravity="center"
+            android:paddingStart="@dimen/space_2"
+            android:paddingTop="@dimen/space_8"
+            android:paddingEnd="@dimen/space_2"
+            android:paddingBottom="@dimen/space_8"
             android:text="@string/demo_dialog_text_text_text"
             android:textColor="@color/dark_brown"
             android:textStyle="bold|italic"
@@ -294,7 +301,6 @@
             android:background="@drawable/fundal_button"
             android:text="@string/backspace_unicode"
             android:textSize="16sp"
-            android:textStyle="bold"
             android:visibility="gone"
             app:layout_constraintBaseline_toBaselineOf="@+id/button_guess"
             app:layout_constraintEnd_toStartOf="@+id/button_guess"
