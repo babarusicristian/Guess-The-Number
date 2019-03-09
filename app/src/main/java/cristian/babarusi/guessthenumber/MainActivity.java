@@ -1,5 +1,6 @@
 package cristian.babarusi.guessthenumber;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonHowToPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dialogHowToPlay();
             }
         });
     }
@@ -92,6 +93,40 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, getString(R.string.please_select_game_mode)
                     , Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void dialogHowToPlay()
+    {
+        final Dialog dialogHowToPlay = new Dialog(MainActivity.this);
+        dialogHowToPlay.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogHowToPlay.setContentView(R.layout.dialog_how_to_play);
+        //dialogHowToPlay.setCancelable(false);
+
+        //setare titlu
+        //TextView titlul = (TextView) dialogHowToPlay.findViewById(R.id.dialog_titlul);
+        //titlul.setText("ATEN?IE");
+
+        // set the custom dialog components - text, image and button
+        //TextView text = (TextView) dialogHowToPlay.findViewById(R.id.dialog_continut);
+        //text.setText("Fara conexiune valida la internet.");
+
+
+        //ImageView image = (ImageView) dialogHowToPlay.findViewById(R.id.dialog_imagine);
+        //aici se incarca imaginea propriu zisa nu din xml
+        //image.setImageResource(R.drawable.iconita_warning);
+
+        Button dialogButtonOK = dialogHowToPlay.findViewById(R.id.button_dialog_how_to_play_ok);
+        // if button YES is clicked DO
+        dialogButtonOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //aici codurile ce sa faca
+                //iesirea propriu zisa
+                dialogHowToPlay.dismiss();
+            }
+        });
+
+        dialogHowToPlay.show();
     }
 
     private void displayVersion() {

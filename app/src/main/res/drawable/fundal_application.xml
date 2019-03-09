@@ -5,7 +5,7 @@
         <shape android:shape="rectangle"  >
             <corners android:radius="0dip" />
             <stroke android:width="0dip" android:color="#f0b629" /> //linie pe margine
-            <gradient android:angle="0" android:startColor="#f5f0ec" android:endColor="#e1d4c6" />
+            <gradient android:angle="0" android:startColor="#ceb7a0" android:endColor="#e1d4c6" />
         </shape>
     </item>
 </selector>

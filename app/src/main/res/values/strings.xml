@@ -27,7 +27,6 @@
     <string name="_7">7</string>
     <string name="_9">9</string>
     <string name="your_number_here">Your number here</string>
-    <string name="ok">OK</string>
     <string name="abandon">Abandon</string>
     <string name="backspace_unicode">\u232B Del</string>
     <string name="demo_attempts_0">Demo Attempts: 0</string>
@@ -64,5 +63,19 @@
     <string name="demo_elapsed_time_00_00">Demo Elapsed time 00:00</string>
     <string name="elapsed_time">Elapsed time:</string>
     <string name="medium">Medium</string>
-    <string name="how_to_play">How to play</string>
+    <string name="how_to_play"><u>How to play</u></string>
+    <string name="ok">OK</string>
+    <string name="content_how_to_play">The game flow is very simple. Mister Robot chooses a random
+        number and you have to guess it. You will receive small hints on every number that you
+        submit. Of course, depending on your game mode Mister Robot can choose a number specific
+        to that criteria.
+    \n\nFor <b>EASY</b> he will choose a number from 1 to 100 (inclusive)
+    \n\nFor <b>MEDIUM</b> he will choose a number from 1 to 1000 (inclusive)
+    \n\nFor <b>HARD</b> he will choose a number from 1 to 10000 (inclusive)</string>
+    <string name="tips_and_tricks"><u>Tips and Tricks</u></string>
+    <string name="content_tips_and_tricks"><b>Tapping</b> on Mister Robot dialog will display all the
+        text instantly without having to wait to finish the animation.
+    \n\n<b>Tapping</b> on the box where your number is displayed will erase the number that is already
+        typed there.
+    \n\nThe <b>elapsed</b> time starts only when Mister Robot finish his talking.</string>
 </resources>
