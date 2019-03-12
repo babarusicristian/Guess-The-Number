@@ -64,6 +64,7 @@
     <string name="elapsed_time">Elapsed time:</string>
     <string name="medium">Medium</string>
     <string name="how_to_play"><u>How to play</u></string>
+    <string name="how_to_play2">How to play</string>
     <string name="ok">OK</string>
     <string name="content_how_to_play">The game flow is very simple. Mister Robot chooses a random
         number and you have to guess it. You will receive small hints on every number that you
@@ -78,4 +79,5 @@
     \n\n<b>Tapping</b> on the box where your number is displayed will erase the number that is already
         typed there.
     \n\nThe <b>elapsed</b> time starts only when Mister Robot finish his talking.</string>
+    <string name="question_mark">\?</string>
 </resources>

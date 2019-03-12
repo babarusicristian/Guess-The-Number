@@ -10,12 +10,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.text.MessageFormat;
 import java.util.Objects;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import cristian.babarusi.guessthenumber.Utils.Logging;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +37,19 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton mRadioButtonHard;
     private TextView mTextViewTotalGamesPlayed;
     private Button mButtonHowToPlay;
+    private TextView mTextViewOne;
+    private TextView mTextViewTwo;
+    private TextView mTextViewThree;
+    private TextView mTextViewFour;
+    private TextView mTextViewFive;
+    private TextView mTextViewSix;
+    private TextView mTextViewSeven;
+    private TextView mTextViewEight;
+    private TextView mTextViewNine;
+    private TextView mTextViewZero;
+    private TextView mTextViewQuestionMark;
+    private int mRandValue;
+    private int mPreviousRandValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
         displayVersion();
+        automaticAnimation();
 
         mButtonStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,10 +89,290 @@ public class MainActivity extends AppCompatActivity {
         mRadioButtonMedium = findViewById(R.id.radioButton_medium);
         mRadioButtonHard = findViewById(R.id.radioButton_hard);
         mTextViewTotalGamesPlayed = findViewById(R.id.textview_total_games_played);
-        //se incarca de la shared pref
         mTextViewTotalGamesPlayed.setText(MessageFormat.format("{0} {1}",
                 getString(R.string.total_games_played), GameDatas.getTotalGamesPlayed()));
         mButtonHowToPlay = findViewById(R.id.button_how_to_play);
+        mTextViewOne = findViewById(R.id.text_view_one);
+        mTextViewTwo = findViewById(R.id.text_view_two);
+        mTextViewThree = findViewById(R.id.text_view_three);
+        mTextViewFour = findViewById(R.id.text_view_four);
+        mTextViewFive = findViewById(R.id.text_view_five);
+        mTextViewSix = findViewById(R.id.text_view_six);
+        mTextViewSeven = findViewById(R.id.text_view_seven);
+        mTextViewEight = findViewById(R.id.text_view_eight);
+        mTextViewNine = findViewById(R.id.text_view_nine);
+        mTextViewZero = findViewById(R.id.text_view_zero);
+        mTextViewQuestionMark = findViewById(R.id.text_view_question_mark);
+    }
+
+    private void automaticAnimation() {
+        Timer timerAutoAnim = new Timer();
+        timerAutoAnim.schedule(new TimerTask() {
+            Random rand = new Random();
+
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        /*
+                        random values from 0 to 10
+                        10 - for question mark
+                        */
+                        mRandValue = rand.nextInt(11); //from 0 to 10
+                        Logging.show(MainActivity.this, "mRandValue: " + mRandValue);
+
+                        //if random is duplicate
+                        if (mRandValue == mPreviousRandValue) {
+                            return;
+                        }
+
+                        Animation animZoomIn =
+                                AnimationUtils.loadAnimation(getApplicationContext(),
+                                        R.anim.zoom_in);
+
+                        final Animation animZoomBack =
+                                AnimationUtils.loadAnimation(getApplicationContext(),
+                                        R.anim.zoom_back);
+
+                        switch (mRandValue) {
+                            case 0:
+                                mTextViewZero.startAnimation(animZoomIn);
+                                mPreviousRandValue = 0;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewZero.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                            case 1:
+                                mTextViewOne.startAnimation(animZoomIn);
+                                mPreviousRandValue = 1;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewOne.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                            case 2:
+                                mTextViewTwo.startAnimation(animZoomIn);
+                                mPreviousRandValue = 2;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewTwo.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                            case 3:
+                                mTextViewThree.startAnimation(animZoomIn);
+                                mPreviousRandValue = 3;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewThree.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                            case 4:
+                                mTextViewFour.startAnimation(animZoomIn);
+                                mPreviousRandValue = 4;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewFour.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                            case 5:
+                                mTextViewFive.startAnimation(animZoomIn);
+                                mPreviousRandValue = 5;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewFive.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                            case 6:
+                                mTextViewSix.startAnimation(animZoomIn);
+                                mPreviousRandValue = 6;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewSix.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                            case 7:
+                                mTextViewSeven.startAnimation(animZoomIn);
+                                mPreviousRandValue = 7;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewSeven.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                            case 8:
+                                mTextViewEight.startAnimation(animZoomIn);
+                                mPreviousRandValue = 8;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewEight.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                            case 9:
+                                mTextViewNine.startAnimation(animZoomIn);
+                                mPreviousRandValue = 9;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewNine.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                            case 10:
+                                mTextViewQuestionMark.startAnimation(animZoomIn);
+                                mPreviousRandValue = 10;
+
+                                animZoomIn.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        mTextViewQuestionMark.startAnimation(animZoomBack);
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+
+                                    }
+                                });
+                                break;
+                        }
+                    }
+                });
+
+            }
+        }, 0, 1666);
     }
 
     private void startGame() {
@@ -95,33 +397,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void dialogHowToPlay()
-    {
+    public void dialogHowToPlay() {
         final Dialog dialogHowToPlay = new Dialog(MainActivity.this);
         dialogHowToPlay.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogHowToPlay.setContentView(R.layout.dialog_how_to_play);
-        //dialogHowToPlay.setCancelable(false);
-
-        //setare titlu
-        //TextView titlul = (TextView) dialogHowToPlay.findViewById(R.id.dialog_titlul);
-        //titlul.setText("ATEN?IE");
-
-        // set the custom dialog components - text, image and button
-        //TextView text = (TextView) dialogHowToPlay.findViewById(R.id.dialog_continut);
-        //text.setText("Fara conexiune valida la internet.");
-
-
-        //ImageView image = (ImageView) dialogHowToPlay.findViewById(R.id.dialog_imagine);
-        //aici se incarca imaginea propriu zisa nu din xml
-        //image.setImageResource(R.drawable.iconita_warning);
 
         Button dialogButtonOK = dialogHowToPlay.findViewById(R.id.button_dialog_how_to_play_ok);
-        // if button YES is clicked DO
+
         dialogButtonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //aici codurile ce sa faca
-                //iesirea propriu zisa
                 dialogHowToPlay.dismiss();
             }
         });
@@ -142,8 +427,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(PlayingActivity.SHARED_PREFS, MODE_PRIVATE);
-        GameDatas.setTotalGamesPlayed(sharedPreferences.getInt(PlayingActivity.TOTAL_GAMES_PLAYED, 0));
+        SharedPreferences sharedPreferences = getSharedPreferences(PlayingActivity.SHARED_PREFS,
+                MODE_PRIVATE);
+        GameDatas.setTotalGamesPlayed(sharedPreferences.getInt(PlayingActivity.TOTAL_GAMES_PLAYED
+                , 0));
     }
 
     @Override
