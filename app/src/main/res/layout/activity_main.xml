@@ -32,24 +32,31 @@
             android:id="@+id/button_start_game"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/fundal_button"
+            android:contentDescription="@null"
             android:text="@string/start_game"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/button_how_to_play"
-            app:layout_constraintEnd_toEndOf="@+id/button_how_to_play"
-            app:layout_constraintStart_toStartOf="@+id/button_how_to_play" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/button_how_to_play"
+            app:layout_constraintEnd_toStartOf="@+id/button_how_to_play"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup" />
 
         <Button
             android:id="@+id/button_how_to_play"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/fundal_button"
+            android:contentDescription="@null"
             android:text="@string/how_to_play2"
-            app:layout_constraintBottom_toTopOf="@+id/textview_version"
+            app:layout_constraintBottom_toTopOf="@+id/textview_total_games_played"
             app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-            app:layout_constraintStart_toStartOf="@+id/radioGroup" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button_start_game"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <TextView
             android:id="@+id/textview_version"
@@ -101,6 +108,7 @@
                 android:layout_marginEnd="@dimen/space_8"
                 android:gravity="center"
                 android:text="@string/easy"
+                android:textSize="@dimen/font_16"
                 tools:layout_editor_absoluteX="146dp"
                 tools:layout_editor_absoluteY="465dp" />
 
@@ -111,6 +119,7 @@
                 android:layout_marginEnd="@dimen/space_8"
                 android:gravity="center"
                 android:text="@string/medium"
+                android:textSize="@dimen/font_16"
                 tools:layout_editor_absoluteX="287dp"
                 tools:layout_editor_absoluteY="523dp" />
 
@@ -120,38 +129,40 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/hard"
+                android:textSize="@dimen/font_16"
                 tools:layout_editor_absoluteX="289dp"
                 tools:layout_editor_absoluteY="477dp" />
         </RadioGroup>
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="0dp"
-            android:layout_height="29dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="@string/game_mode_selection"
             app:layout_constraintBottom_toTopOf="@+id/radioGroup"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_seven"
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_width="290dp"
+            android:layout_height="300dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             android:contentDescription="@null"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_game_by"
-            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/robot_main" />
 
         <TextView
@@ -159,7 +170,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:gravity="center"
@@ -168,8 +178,7 @@
             app:layout_constraintBottom_toTopOf="@+id/textview_version"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_how_to_play" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/text_view_three"
@@ -181,7 +190,7 @@
             android:gravity="center"
             android:text="@string/_3"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_30"
             android:textStyle="bold|italic"
             app:layout_constraintStart_toStartOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -196,7 +205,7 @@
             android:gravity="center"
             android:text="@string/_9"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_30"
             android:textStyle="bold|italic"
             app:layout_constraintEnd_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -211,7 +220,7 @@
             android:gravity="center"
             android:text="@string/_1"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_30"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintStart_toStartOf="@+id/imageView2" />
@@ -226,7 +235,7 @@
             android:gravity="center"
             android:text="@string/_6"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_40"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="@+id/imageView2" />
@@ -235,17 +244,18 @@
             android:id="@+id/text_view_five"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="serif"
             android:gravity="center"
             android:text="@string/_5"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_30"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toTopOf="@+id/text_view_four"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_three"
             app:layout_constraintVertical_bias="0.7" />
 
@@ -260,7 +270,7 @@
             android:gravity="center"
             android:text="@string/_7"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_30"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toStartOf="@+id/text_view_six"
@@ -272,16 +282,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="serif"
             android:gravity="center"
             android:text="@string/_2"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_30"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toTopOf="@+id/text_view_eight"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/text_view_nine"
             app:layout_constraintVertical_bias="0.65" />
 
@@ -296,7 +307,7 @@
             android:gravity="center"
             android:text="@string/_4"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_40"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toStartOf="@+id/text_view_seven"
@@ -313,7 +324,7 @@
             android:gravity="center"
             android:text="@string/_8"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_30"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toStartOf="@+id/text_view_six"
@@ -330,7 +341,7 @@
             android:gravity="center"
             android:text="@string/_0"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_40"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toTopOf="@+id/text_view_two"
             app:layout_constraintEnd_toEndOf="@+id/imageView2"
@@ -347,7 +358,7 @@
             android:gravity="center"
             android:text="@string/question_mark"
             android:textColor="@color/dark_brown"
-            android:textSize="@dimen/font_32"
+            android:textSize="@dimen/font_40"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toTopOf="@+id/text_view_five"
             app:layout_constraintStart_toStartOf="@+id/imageView2"

@@ -446,7 +446,7 @@ public class PlayingActivity extends AppCompatActivity {
     private void completeRobotDialog() {
         final Timer tempTimeGap = new Timer();
 
-        if (isFirstTimeMsg()) {
+        if (isFirstTimeMsg() && mLinearLayoutButtons.getVisibility() != View.VISIBLE) {
             timerAnimText.cancel(); //stop animation text timer
             setOverAnimText(true);
 
@@ -470,6 +470,7 @@ public class PlayingActivity extends AppCompatActivity {
                     });
                 }
             }, 0, LETTERS_SPEED);
+
         } else {
             timerAnimText.cancel(); //stop animation text timer
             setOverAnimText(true);

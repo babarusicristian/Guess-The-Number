@@ -2,18 +2,18 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android" android:fillAfter="true">
     <scale
         android:duration="2000"
-        android:fromXScale="2"
-        android:fromYScale="2"
+        android:fromXScale="1"
+        android:fromYScale="1"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:toXScale="1"
-        android:toYScale="1"/>
+        android:toXScale="2"
+        android:toYScale="2"/>
 
-    <!-- rotate back -->
+    <!-- rotate start -->
     <rotate
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:fromDegrees="15"
-        android:toDegrees="0"
+        android:fromDegrees="0"
+        android:toDegrees="-30"
         android:pivotX="50%"
         android:pivotY="50%"
         android:duration="2000"
