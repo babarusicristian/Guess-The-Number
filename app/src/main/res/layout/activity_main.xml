@@ -18,12 +18,11 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
             android:contentDescription="@null"
             android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/image_view_quit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo_title" />
@@ -48,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/fundal_button"
             android:contentDescription="@null"
             android:text="@string/how_to_play2"
@@ -67,6 +66,7 @@
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="@string/demo_version_x_x_xx"
+            android:textColor="@color/dark_gray"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +81,7 @@
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:text="@string/game_by_babarusi_cristian"
+            android:textColor="@color/dark_gray"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -144,6 +145,7 @@
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="@string/game_mode_selection"
+            android:textColor="@color/dark_gray"
             app:layout_constraintBottom_toTopOf="@+id/radioGroup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
@@ -174,6 +176,7 @@
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="@string/demo_total_games_played_xxx"
+            android:textColor="@color/dark_gray"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textview_version"
             app:layout_constraintEnd_toEndOf="parent"
@@ -363,6 +366,21 @@
             app:layout_constraintBottom_toTopOf="@+id/text_view_five"
             app:layout_constraintStart_toStartOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/text_view_three" />
+
+        <ImageView
+            android:id="@+id/image_view_quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/fundal_ripple_effect"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:focusable="true"
+            android:padding="@dimen/space_4"
+            app:layout_constraintBottom_toTopOf="@+id/imageview_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageview_logo"
+            app:srcCompat="@drawable/ic_exit_game" />
 
     </android.support.constraint.ConstraintLayout>
 

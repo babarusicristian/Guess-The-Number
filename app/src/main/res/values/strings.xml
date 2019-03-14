@@ -7,6 +7,7 @@
     <string name="demo_version_x_x_xx">demo version x.x.xx</string>
     <string name="game_mode_selection">Game Mode Selection</string>
     <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
     <string name="hard">Hard</string>
     <string name="please_select_game_mode">Please select a game mode</string>
     <string name="demo_dialog_text_text_text">Demo dialog text text text</string>
@@ -62,7 +63,6 @@
     <string name="all_right">All right. I picked another number. Let\'s see if you can guess it. Remember is a number from 1 to</string>
     <string name="demo_elapsed_time_00_00">Demo Elapsed time 00:00</string>
     <string name="elapsed_time">Elapsed time:</string>
-    <string name="medium">Medium</string>
     <string name="how_to_play"><u>How to play</u></string>
     <string name="how_to_play2">How to play</string>
     <string name="ok">OK</string>

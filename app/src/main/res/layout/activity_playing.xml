@@ -31,11 +31,11 @@
             app:srcCompat="@drawable/robot_playing" />
 
         <TextView
-            android:background="@drawable/fundal_ripple_effect"
             android:id="@+id/textview_robot_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_8"
+            android:background="@drawable/fundal_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="casual"
@@ -336,6 +336,7 @@
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:text="@string/demo_attempts_0"
+            android:textColor="@color/dark_gray"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/textview_player_number"
             app:layout_constraintTop_toBottomOf="@+id/textview_player_number"
@@ -345,26 +346,27 @@
             android:id="@+id/textview_show_gamemode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/space_4"
+            android:layout_marginStart="8dp"
             android:gravity="center"
             android:text="@string/demo_show_gamemode"
+            android:textColor="@color/dark_gray"
             app:layout_constraintBaseline_toBaselineOf="@+id/textview_current_games_played"
             app:layout_constraintEnd_toStartOf="@+id/textview_current_games_played"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/guideline_left" />
+            app:layout_constraintStart_toEndOf="@+id/image_view_back" />
 
         <TextView
             android:id="@+id/textview_current_games_played"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_4"
-            android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="@string/demo_current_games_played_demo"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_back"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textview_show_gamemode"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/image_view_back" />
 
         <Button
             android:id="@+id/button_one_more_time"
@@ -401,10 +403,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/demo_elapsed_time_00_00"
+            android:textColor="@color/dark_gray"
             android:visibility="gone"
             app:layout_constraintBaseline_toBaselineOf="@+id/textview_attempts"
             app:layout_constraintStart_toStartOf="@+id/textview_player_number"
             tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/image_view_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_4"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/fundal_ripple_effect"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back" />
 
     </android.support.constraint.ConstraintLayout>
 

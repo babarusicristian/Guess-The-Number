@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -62,6 +63,7 @@ public class PlayingActivity extends AppCompatActivity {
     private Button mButtonOneMoreTime;
     private Button mButtonGoBack;
     private TextView mTextViewElapsedTime;
+    private ImageView mImageViewBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,8 @@ public class PlayingActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_playing);
+
+        hideNavigationBar();
 
         mGame = new Game();
         mGameTimers = new GameTimers();
@@ -410,6 +414,13 @@ public class PlayingActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        mImageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     //my methods
@@ -441,6 +452,17 @@ public class PlayingActivity extends AppCompatActivity {
         mTextViewElapsedTime = findViewById(R.id.textview_elapsed_time);
         mTextViewElapsedTime.setText(MessageFormat.format("{0} 00:00",
                 getString(R.string.elapsed_time)));
+        mImageViewBack = findViewById(R.id.image_view_back);
+    }
+
+    private void hideNavigationBar() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
     private void completeRobotDialog() {
@@ -886,6 +908,12 @@ public class PlayingActivity extends AppCompatActivity {
 
     public void setFirstTimeMsg(Boolean firstTimeMsg) {
         this.firstTimeMsg = firstTimeMsg;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideNavigationBar();
     }
 
     @Override
