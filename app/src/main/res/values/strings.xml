@@ -9,7 +9,7 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
-    <string name="please_select_game_mode">Please select a game mode</string>
+    <string name="please_select_game_mode">Please select a game mode in order to play</string>
     <string name="demo_dialog_text_text_text">Demo dialog text text text</string>
     <string name="robot_say_hi_there">Hi there.
         \nDo you know what number I have now in my robotic mind?
@@ -78,6 +78,14 @@
         text instantly without having to wait to finish the animation.
     \n\n<b>Tapping</b> on the box where your number is displayed will erase the number that is already
         typed there.
+        \n\n<b>See Attempts</b> can help you by showing what numbers you already tried.
     \n\nThe <b>elapsed</b> time starts only when Mister Robot finish his talking.</string>
     <string name="question_mark">\?</string>
+    <string name="see_attempts"><u>See Attempts</u></string>
+    <string name="your_current_attempts"><u>Current game attempts</u></string>
+    <string name="you_tried">You tried:</string>
+    <string name="succcessfully">( SUCCESSFULLY )</string>
+    <string name="unsuccessfully">( unsuccessfully )</string>
+    <string name="there_are_no_attempts_to_display">There are no attempts to display.</string>
+    <string name="total_attempts">Total attempts:</string>
 </resources>

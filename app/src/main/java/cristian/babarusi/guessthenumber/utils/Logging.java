@@ -1,4 +1,4 @@
-package cristian.babarusi.guessthenumber.Utils;
+package cristian.babarusi.guessthenumber.utils;
 
 import android.util.Log;
 import cristian.babarusi.guessthenumber.BuildConfig;

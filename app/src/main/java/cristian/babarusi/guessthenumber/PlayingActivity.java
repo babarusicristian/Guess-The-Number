@@ -1,5 +1,6 @@
 package cristian.babarusi.guessthenumber;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,11 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cristian.babarusi.guessthenumber.Utils.Logging;
+import cristian.babarusi.guessthenumber.utils.Logging;
 
 public class PlayingActivity extends AppCompatActivity {
 
@@ -30,7 +33,10 @@ public class PlayingActivity extends AppCompatActivity {
     private final static int MAX_LEN_HARD = 5;
 
     private final static int LETTERS_SPEED = 40;
+    private static final String TXT_VALUE_WIN = "win";
+    private static final String TXT_VALUE_NOWIN = "nowin";
 
+    private ArrayList<String> attemptsList;
     private Boolean firstTimeMsg = true;
     private Game mGame;
     private GameTimers mGameTimers;
@@ -64,6 +70,7 @@ public class PlayingActivity extends AppCompatActivity {
     private Button mButtonGoBack;
     private TextView mTextViewElapsedTime;
     private ImageView mImageViewBack;
+    private TextView mTextViewSeeAttempts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -421,6 +428,13 @@ public class PlayingActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        mTextViewSeeAttempts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogSeeAttempts();
+            }
+        });
     }
 
     //my methods
@@ -453,6 +467,8 @@ public class PlayingActivity extends AppCompatActivity {
         mTextViewElapsedTime.setText(MessageFormat.format("{0} 00:00",
                 getString(R.string.elapsed_time)));
         mImageViewBack = findViewById(R.id.image_view_back);
+        mTextViewSeeAttempts = findViewById(R.id.text_view_see_attempts);
+        attemptsList = new ArrayList<>();
     }
 
     private void hideNavigationBar() {
@@ -463,6 +479,52 @@ public class PlayingActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
         decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    private void dialogSeeAttempts() {
+        final Dialog dialogSeeAttempts = new Dialog(PlayingActivity.this);
+        dialogSeeAttempts.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogSeeAttempts.setContentView(R.layout.dialog_see_attempts);
+        //help to hide navigation bar into dialog
+        View decorView = dialogSeeAttempts.getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(uiOptions);
+
+        TextView textViewListAttempts = dialogSeeAttempts.findViewById(R.id.dialog_text_view_list_attempts);
+
+        String textTemp = "";
+        String totalAttempts = getString(R.string.total_attempts) + " " + attemptsList.size();
+
+        if (attemptsList.size() == 0) {
+            textTemp = getString(R.string.there_are_no_attempts_to_display);
+        } else {
+            //do NOT sort
+            //only display from last to first
+            for (int i = attemptsList.size() - 1; i >= 0; i--) {
+                if (i == 0) {
+                    textTemp += attemptsList.get(i);
+                } else {
+                    textTemp += attemptsList.get(i) + "\n";
+                }
+            }
+        }
+        textViewListAttempts.setText(MessageFormat.format("{0}\n\n{1}", textTemp, totalAttempts));
+
+        Button dialogButtonOK = dialogSeeAttempts.findViewById(R.id.button_dialog_see_attempts_ok);
+
+        dialogButtonOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogSeeAttempts.dismiss();
+                hideNavigationBar();
+            }
+        });
+
+        dialogSeeAttempts.show();
     }
 
     private void completeRobotDialog() {
@@ -521,17 +583,17 @@ public class PlayingActivity extends AppCompatActivity {
                 if (getGameMode().equals("easy") && isOverAnimText()) {
                     mGame.setRobotMessage(getString(R.string.zero_no) + " " + Game.NUM_EASY + ".");
                     animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    attemptPlus(); //count attempt
+                    attemptPlus(TXT_VALUE_NOWIN); //count attempt
                 } else if (getGameMode().equals("medium") && isOverAnimText()) {
                     mGame.setRobotMessage(getString(R.string.zero_no) + " " + Game.NUM_MEDIUM +
                             ".");
                     animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    attemptPlus(); //count attempt
+                    attemptPlus(TXT_VALUE_NOWIN); //count attempt
                 } else {
                     if (isOverAnimText()) {
                         mGame.setRobotMessage(getString(R.string.zero_no) + " " + Game.NUM_HARD + ".");
                         animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                        attemptPlus(); //count attempt
+                        attemptPlus(TXT_VALUE_NOWIN); //count attempt
                     }
                 }
             } else {
@@ -540,7 +602,7 @@ public class PlayingActivity extends AppCompatActivity {
                     mGame.setRobotMessage(getString(R.string.ohh_start_with_zero) + " "
                             + getNumber() + " " + getString(R.string.is_not_valid));
                     animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    //don't count attempt
+                    attemptPlus(TXT_VALUE_NOWIN); //count attempt - was no count attempt
                 }
             }
         } else {
@@ -558,31 +620,31 @@ public class PlayingActivity extends AppCompatActivity {
                             + getString(R.string.the) + " " + num + " "
                             + getString(R.string.is_huge_num) + " " + Game.NUM_EASY + ".");
                     animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    attemptPlus(); //count attempt
+                    attemptPlus(TXT_VALUE_NOWIN); //count attempt
                 } else if (getGameMode().equals("medium") && num > Game.NUM_MEDIUM && isOverAnimText()) {
                     mGame.setRobotMessage(getString(R.string.wow_no_no_no) + " "
                             + getString(R.string.the) + " " + num + " "
                             + getString(R.string.is_huge_num) + " " + Game.NUM_MEDIUM + ".");
                     animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    attemptPlus(); //count attempt
+                    attemptPlus(TXT_VALUE_NOWIN); //count attempt
                 } else if (getGameMode().equals("hard") && num > Game.NUM_HARD && isOverAnimText()) {
                     mGame.setRobotMessage(getString(R.string.wow_no_no_no) + " "
                             + getString(R.string.the) + " " + num + " "
                             + getString(R.string.is_huge_num) + " " + Game.NUM_HARD + ".");
                     animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    attemptPlus(); //count attempt
+                    attemptPlus(TXT_VALUE_NOWIN); //count attempt
                 } else if (num < mGame.getNumberToBeGuessed() && isOverAnimText()) {
                     mGame.setRobotMessage(getString(R.string.no_is_not) + " " + num + getString(R.string.my_num_is_bigger));
                     animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    attemptPlus(); //count attempt
+                    attemptPlus(TXT_VALUE_NOWIN); //count attempt
                 } else if (num > mGame.getNumberToBeGuessed() && isOverAnimText()) {
                     mGame.setRobotMessage(getString(R.string.no_is_not) + " " + num + getString(R.string.my_num_is_smaller));
                     animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    attemptPlus(); //count attempt
+                    attemptPlus(TXT_VALUE_NOWIN); //count attempt
                 } else if (num == mGame.getNumberToBeGuessed() && isOverAnimText()) {
                     mGame.setRobotMessage(getString(R.string.yupii_yes) + " " + num + " " + getString(R.string.is_my_num));
                     animateText(mGame.getRobotMessage(), mTextViewRobotMessage);
-                    attemptPlus(); //count attempt
+                    attemptPlus(TXT_VALUE_WIN); //count attempt (winner)
 
                     //increment games played and display
                     mGame.setCurrentGamesPlayed(mGame.getCurrentGamesPlayed() + 1);
@@ -731,6 +793,9 @@ public class PlayingActivity extends AppCompatActivity {
                     });
                 }
             }, 0, 100);
+
+            //clear attemptsList - empty see attempts
+            attemptsList.clear();
         }
 
     }
@@ -826,7 +891,21 @@ public class PlayingActivity extends AppCompatActivity {
     }
 
     //increment attempts
-    private void attemptPlus() {
+    private void attemptPlus(String txtValue) {
+        //add items for see attempts with different display values
+        if (txtValue.equals(TXT_VALUE_WIN)) {
+            String textToAdd = getString(R.string.you_tried) + " " +
+                    mTextViewPlayerNumber.getText().toString() + " " + getString(R.string.succcessfully);
+            attemptsList.add(textToAdd);
+        } else if (txtValue.equals(TXT_VALUE_NOWIN)) {
+            String textToAdd = getString(R.string.you_tried) + " " +
+                    mTextViewPlayerNumber.getText().toString()+ " " + getString(R.string.unsuccessfully);
+            attemptsList.add(textToAdd);
+        }
+
+
+
+
         mGame.incrementAttempts();
         mTextViewAttempts.setText(MessageFormat.format("{0} {1}", getString(R.string.attempts),
                 mGame.getAttempts()));
@@ -908,6 +987,20 @@ public class PlayingActivity extends AppCompatActivity {
 
     public void setFirstTimeMsg(Boolean firstTimeMsg) {
         this.firstTimeMsg = firstTimeMsg;
+    }
+
+    //help hidding navigation bar on dialog box
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        } else {
+            hideNavigationBar();
+        }
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cristian.babarusi.guessthenumber.Utils.Logging;
+import cristian.babarusi.guessthenumber.utils.Logging;
 
 public class AutomaticAnimation extends AppCompatActivity {
 
@@ -565,6 +565,6 @@ public class AutomaticAnimation extends AppCompatActivity {
                     }
                 });
             }
-        }, 0, 1800);
+        }, 0, 1300);
     }
 }

@@ -10,22 +10,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.text.MessageFormat;
 import java.util.Objects;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import cristian.babarusi.guessthenumber.Utils.Logging;
+import cristian.babarusi.guessthenumber.utils.Snack;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -131,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startGame() {
+        View view = getWindow().getDecorView().findViewById(android.R.id.content);
+
         if (mRadioButtonEasy.isChecked()) {
             //Sending data for EASY mode
             Intent intentPlaying = new Intent(MainActivity.this, PlayingActivity.class);
@@ -147,12 +140,11 @@ public class MainActivity extends AppCompatActivity {
             intentPlaying.putExtra(GAME_MODE, "hard");
             startActivity(intentPlaying);
         } else {
-            Toast.makeText(MainActivity.this, getString(R.string.please_select_game_mode)
-                    , Toast.LENGTH_SHORT).show();
+            Snack.bar(view, getString(R.string.please_select_game_mode));
         }
     }
 
-    public void dialogHowToPlay() {
+    private void dialogHowToPlay() {
         final Dialog dialogHowToPlay = new Dialog(MainActivity.this);
         dialogHowToPlay.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogHowToPlay.setContentView(R.layout.dialog_how_to_play);

@@ -423,6 +423,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_back" />
 
+        <TextView
+            android:id="@+id/text_view_see_attempts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:padding="@dimen/space_8"
+            android:text="@string/see_attempts"
+            android:textColor="@drawable/text_click_change"
+            app:layout_constraintEnd_toEndOf="@+id/textview_current_games_played"
+            app:layout_constraintStart_toStartOf="@+id/textview_current_games_played"
+            app:layout_constraintTop_toBottomOf="@+id/textview_current_games_played" />
+
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>
