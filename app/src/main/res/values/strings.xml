@@ -3,7 +3,7 @@
     <string name="start_game">Start game</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="version">DNAS Software \u00AE version</string>
-    <string name="game_by_babarusi_cristian">A game for KIDS by Băbăruși Cristian</string>
+    <string name="game_by_babarusi_cristian">A game for <b>KIDS</b> by Băbăruși Cristian</string>
     <string name="demo_version_x_x_xx">demo version x.x.xx</string>
     <string name="game_mode_selection">Game Mode Selection</string>
     <string name="easy">Easy</string>
