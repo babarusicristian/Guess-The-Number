@@ -7,6 +7,10 @@ A funny simple game for kids started in classroom. This was my idea of a funny a
 
 Link to the application : --> [Guess The Number](https://play.google.com/store/apps/details?id=cristian.babarusi.guessthenumber)
 
+#### version 1.0.78 (added great animations)
+<a href="url"><img src="https://i.imgur.com/v21CU29.png" align="left" height="35%" width="35%" ></a>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 #### version 1.0.45
 ![alt text](https://i.imgur.com/LbDd6Sl.jpg)
 
