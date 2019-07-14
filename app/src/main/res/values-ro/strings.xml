@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ghicește Numărul</string>
+    <string name="start_game">Start joc</string>
+    <string name="version">DNAS Software \u00AE versiunea</string>
+    <string name="game_by_babarusi_cristian">Un joc pentru <b>COPII</b> de Băbăruși Cristian</string>
+    <string name="game_mode_selection">Selecție Mod Joc</string>
+    <string name="easy">Ușor</string>
+    <string name="medium">Mediu</string>
+    <string name="hard">Greu</string>
+    <string name="please_select_game_mode">Alege un mod de joc pentru a începe</string>
+    <string name="robot_say_hi_there">Salutare.
+        \nPoți să ghicești ce număr am acum în mintea mea robotică?
+        \nEste un număr de la 1 la</string>
+    <string name="yes_i_can">Da, Îl ghicesc</string>
+    <string name="no_i_cant">Nu, nu sunt magician</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_0">0</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_8">8</string>
+    <string name="_7">7</string>
+    <string name="_9">9</string>
+    <string name="your_number_here">Numărul tău aici</string>
+    <string name="backspace_unicode">\u232B Șterge</string>
+    <string name="attempts">Încercări:</string>
+    <string name="ohh_start_with_zero">Ohh, numărul începe cu zero.</string>
+    <string name="is_not_valid"> nu este valid, te rog corectează.</string>
+    <string name="zero_no">Zero? Nu, numărul meu este de la 1 la</string>
+    <string name="you_did_not_enter_number">Hey, ce este asta? Nu ai introdus nici un număr.</string>
+    <string name="no_is_not">Nu, nu este</string>
+    <string name="my_num_is_bigger">. Numărul meu este mai mare de atât.</string>
+    <string name="my_num_is_smaller">. Numărul meu este mai mic de atât.</string>
+    <string name="yupii_yes">Yupii. Da,</string>
+    <string name="is_my_num">este numărul. Felicitări.
+    \n\nVrei să joci încă o dată?</string>
+    <string name="show_easy_gamemode_selection">Mod joc: UȘOR</string>
+    <string name="show_medium_gamemode_selection">Mod joc: MEDIU</string>
+    <string name="show_hard_gamemode_selection">Mod joc: GREU</string>
+    <string name="wow_no_no_no">Woow. Nu, nu, nu …</string>
+    <string name="the"> </string>
+    <string name="is_huge_num">este prea mare. Numărul meu este de la 1 la</string>
+
+    <string name="guess">Ghicesc</string>
+    <string name="current_games_played">Jocuri curente:</string>
+    <string name="one_more_time">Da, incă o dată</string>
+    <string name="go_back">Nu, Mă duc înapoi</string>
+    <string name="attempts_point">incercări.</string>
+    <string name="you_ve_guessed">L-ai ghicit</string>
+    <string name="from">din</string>
+    <string name="total_games_played">Total jocuri:</string>
+    <string name="all_right">În regulă. Am ales alt număr. Să vedem dacă poți să îl ghicești. Nu uita este un număr de la 1 la</string>
+    <string name="elapsed_time">Timp scurs:</string>
+    <string name="how_to_play"><u>Cum să joci</u></string>
+    <string name="how_to_play2">Cum să joci</string>
+    <string name="ok">OK</string>
+    <string name="content_how_to_play">Jocului este foarte simplu. Domnul Robot alege un
+        număr la întâmplare iar tu trebuie să îl ghicești. O să primești mici indicii la fiecare
+        încercare de ghicire. Totul depinde de modul de joc, în funcție de el Domnul Robot alege
+        numărul.
+    \n\nPentru <b>UȘOR</b> va alege un număr de la 1 la 100 (inclusiv)
+    \n\nPentru <b>MEDIU</b> va alege un număr de la 1 la 1000 (inclusiv)
+    \n\nPentru <b>GREU</b> va alege un număr de la 1 la 10000 (inclusiv)</string>
+    <string name="tips_and_tricks"><u>Sfaturi și trucuri</u></string>
+    <string name="content_tips_and_tricks">Dacă dai <b>click</b> pe mesajul Domnului Robot îl va
+        afișa pe tot instant fără să mai fie nevoie să aștepți ca animația să se termine.
+    \n\nDacă dai <b>click</b> pe căsuța în care este numărul afișat, va șterge imediat numărul deja
+        introdus.
+        \n\n<b>Vezi încercările</b> te poate ajuta să îți amintești numerele pe care deja le-ai
+        încercat.
+    \n\nTimpul <b>scurs</b> incepe imediat ce Domnul Robot termină de vorbit.</string>
+    <string name="question_mark">\?</string>
+    <string name="see_attempts"><u>Vezi încercările</u></string>
+    <string name="your_current_attempts"><u>Încercări curente:</u></string>
+    <string name="you_tried">Ai încercat:</string>
+    <string name="succcessfully">( CU SUCCES )</string>
+    <string name="unsuccessfully">( fără succes )</string>
+    <string name="there_are_no_attempts_to_display">Nu sunt încercări de afișat.</string>
+    <string name="total_attempts">Total încercări:</string>
+</resources>

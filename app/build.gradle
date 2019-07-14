@@ -6,8 +6,8 @@ android {
         applicationId "cristian.babarusi.guessthenumber"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 9
-        versionName "1.0.89"
+        versionCode 10
+        versionName "1.0.910"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
